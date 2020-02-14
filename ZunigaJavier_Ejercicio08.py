@@ -19,7 +19,7 @@ def model_B(x,params):
 
 
 
-def run_mcmc(data_file="data_to_fit.txt",model, n_dim=1, n_iterations=20000, sigma_y=0.1):
+def corr(data_file="data_to_fit.txt",model, n_dim=1, n_iterations=20000, sigma_y=0.1):
     data = np.loadtxt(data_file)
     x_obs = data[:,0]
     y_obs = data[:, 1]
@@ -48,40 +48,11 @@ def run_mcmc(data_file="data_to_fit.txt",model, n_dim=1, n_iterations=20000, sig
         
     betas = betas[n_iterations//2:,:]       
     #return {'betas':betas, 'x_obs':x_obs, 'y_obs':y_obs}
-( run_mcmc())
+( corr())
 
 
 n_dim = 1
 
 betas = results['betas']
-
-plt.figure()
-for i in range(0,n_dim+1):
-    plt.subplot(2,3,i+1)
-    plt.hist(betas[:,i],bins=15, density=True)
-    plt.title(r"$\beta_{}= {:.2f}\pm {:.2f}$".format(i,np.mean(betas[:,i]), np.std(betas[:,i])))
-    plt.xlabel(r"$\beta_{}$".format(i))
-plt.subplots_adjust(hspace=0.5)
-plt.savefig("Parábola.png",  bbox_inches='tight')    
-
-data = np.loadtxt("data_to_fit.txt")
-x_obs = data[:,0]
-y_obs = data[:, 1]
-sigma_y_obs =  data[:, 2]
-
-plt.figure()
-for i in range(0,n_dim+1):
-    plt.subplot(2,3,i+1)
-    plt.hist(betas[:,i],bins=15, density=True)
-    plt.title(r"$\beta_{}= {:.2f}\pm {:.2f}$".format(i,np.mean(betas[:,i]), np.std(betas[:,i])))
-    plt.xlabel(r"$\beta_{}$".format(i))
-plt.subplots_adjust(hspace=0.5)
-plt.savefig("Gausseana.png",  bbox_inches='tight')    
-
-data = np.loadtxt("data_to_fit.txt")
-x_obs = data[:,0]
-y_obs = data[:, 1]
-sigma_y_obs =  data[:, 2]
-
-
+"""A partir de aquí se deben realizar lpos """
 
